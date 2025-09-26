@@ -20,6 +20,10 @@ This file is able to:
 """
 
 def printBoard(board):
+    """
+    Prints the current state of the board with row and column labels.
+    """
+
     for i in range(len(board)):
         print("| " + str(6 - i), end=" ")
         row = board[-1-i]
@@ -141,34 +145,34 @@ def playGame():
     """
 
     print("New Game: X Goes First\n")
-    board = resetBoard() #Reset the board to start the game
-    printBoard(board) #Print the blank board
+    board = resetBoard() # Reset the board to start the game
+    printBoard(board) # Print the blank board
     game_over = False
-    current_player = "X" #X always goes first
+    current_player = "X" # X always goes first
 
     while not game_over:
-        print(f"{current_player}'s Turn.") #Say whos turn it is, this will change every turn
+        print(f"{current_player}'s Turn.") # Say whos turn it is, this will change every turn
         print(f"Where do you want your {current_player} placed?")
         open_positions = availablePositions(board)
         print(f"Available positions: {open_positions} \n")
         entry = input("Please enter column-letter and row-number (e.g., a1): ")
         print("Thank you for your selection,")
-        position = validateEntry(entry, board) #check if entry is of valid format and 
+        position = validateEntry(entry, board) # check if entry is of valid format and available
 
-        if position: #if position is not None, then it is valid, This assumes use enters valid col,row, but not out of range
+        if position: # if position is not None, then it is valid
 
             row, col = position
             print(f'You have entered column {entry[0]} \n\t\tand row #{row}.')
-            if updateBoard(board, col, current_player): #update the board and check if the cell is taken, if None, then try again
-                printBoard(board) #print board with new input
-                
-                if checkEnd(board): #check if the game is over by checking win or full
+            if updateBoard(board, col, current_player): # update the board and check if the cell is taken, if None, then try again
+                printBoard(board) # print board with new input
+
+                if checkEnd(board): # check if the game is over by checking win or full
                     game_over = True
                     if checkWin(board):
                         print(f"Player {current_player} wins!")
                     else:
                         print("It's a draw!")
-                current_player = "O" if current_player == "X" else "X" #this is how the turn switches players every turn
+                current_player = "O" if current_player == "X" else "X" # this is how the turn switches players every turn
 
 def main():
     new_game = 'y'
